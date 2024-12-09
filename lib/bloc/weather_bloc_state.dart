@@ -4,7 +4,6 @@ part of 'weather_bloc_bloc.dart';
 sealed class WeatherBlocState {
   const WeatherBlocState();
 
-  @override
   List<Object> get props => [];
 }
 
