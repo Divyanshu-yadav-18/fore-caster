@@ -17,10 +17,23 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BlocProvider<WeatherBlocBloc>(
-        create: (context) => WeatherBlocBloc()..add(FetchWeather()),
-        child: MyHomePage(),
-      ),
+      home:FutureBuilder(
+        future:_determinePosition(),
+        builder:(context,snap){
+          if(snap.hasData){
+            return  BlocProvider<WeatherBlocBloc>(
+              create: (context) => WeatherBlocBloc()..add(FetchWeather()),
+              child: MyHomePage(),
+      );
+          }else{
+            return Scaffold(
+              body: Center(
+                child:CircularProgressIndicator(),
+              ),
+            );
+          }
+        }
+      )
     );
   }
 }
